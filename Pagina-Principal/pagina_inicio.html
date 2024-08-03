@@ -10,7 +10,8 @@
     <div class="container">
         <nav class="navbar">
             <ul>
-                <li><a href="#rooms">Salas</a></li>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#rooms">Mesas</a></li>
                 <li><a href="#menu">Menú</a></li>
                 <li><a href="#clients">Clientes</a></li>
                 <li><a href="#accounts">Cuentas</a></li>
@@ -18,29 +19,98 @@
             </ul>
         </nav>
         <div class="content">
-            <h1>Bienvenido a D'Jake restaurant</h1>
-            <section id="rooms">
-                <h2>Salas</h2>
-                <!-- Aquí se mostrarán las mesas disponibles y no disponibles -->
+            <h1 id="home-title">Bienvenido a D'Jake restaurant</h1>
+            <section id="rooms" class="section">
+                <h2>Mesas</h2>
+                <div id="tables-container">
+                    <!-- Las imágenes de las mesas se cargarán aquí -->
+                </div>
+                <form id="add-client-form">
+                    <h3>Agregar Cliente a Mesa</h3>
+                    <label for="table-select">Seleccionar Mesa:</label>
+                    <select id="table-select"></select>
+                    <label for="client-name">Nombre del Cliente:</label>
+                    <input type="text" id="client-name" required>
+                    <button type="submit">Agregar Cliente</button>
+                </form>
             </section>
-            <section id="menu">
+            <section id="menu" class="section">
                 <h2>Menú</h2>
-                <!-- Aquí se mostrará el menú del restaurante -->
+                <div id="menu-container">
+                    <!-- Los elementos del menú se cargarán aquí -->
+                </div>
             </section>
-            <section id="clients">
+            <section id="clients" class="section">
                 <h2>Clientes</h2>
-                <!-- Aquí se mostrarán las mesas ocupadas con su fecha -->
+                <form id="add-food-form">
+                    <label for="client-select">Seleccionar Cliente:</label>
+                    <select id="client-select"></select>
+                    <label for="food-select">Seleccionar Comida:</label>
+                    <select id="food-select"></select>
+                    <button type="submit">Agregar Comida</button>
+                </form>
+                <div id="clients-container">
+                    <!-- Los clientes y sus pedidos se mostrarán aquí -->
+                </div>
             </section>
-            <section id="accounts">
+            <section id="accounts" class="section">
                 <h2>Cuentas</h2>
-                <!-- Aquí se mostrarán las cuentas de los diferentes clientes -->
+                <div id="accounts-container">
+         <!-- Las cuentas de los clientes se cargarán aquí -->
+                </div>
+
+                
             </section>
-            <section id="summary">
+            <section id="summary" class="section">
                 <h2>Cuadre</h2>
-                <!-- Aquí se mostrará el total de todo lo vendido en el día actual -->
+                <!-- Contenido de Cuadre -->
             </section>
         </div>
     </div>
+    <!-- <script src="js/accounts.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/clients.js"></script>
+    <script src="js/home.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/navegation.js"></script>
+    <script src="js/reset.js"></script>
+    <script src="js/tables.js"></script> -->
+
+     <!--El que esta mejor -->
+     <!-- 
+     <script src="js/home.js"></script> 
+     <script src="js/navegation.js"></script> 
+     <script src="js/reset.js"></script> 
+     <script src="js/tables.js"></script>
+     <script src="js/clients.js"></script>
+     <script src="js/app.js"></script>
+     <script src="js/menu.js"></script>
+     <script src="js/accounts.js"></script>
+      -->
+
+
+     <script src="js/home.js"></script> 
+     <script src="js/navegation.js"></script> 
+     <script src="js/reset.js"></script> 
+     <script src="js/tables.js"></script>
+     <script src="js/menu.js"></script>
+     <script src="js/clients.js"></script>
+     <script src="js/accounts.js"></script>
+     <script src="js/app.js"></script>
+
+<!-- 
+     <script src="js/accounts.js"></script>
+     <script src="js/app.js"></script>
+     <script src="js/clients.js"></script>
+     <script src="js/home.js"></script>
+     <script src="js/menu.js"></script>
+     <script src="js/navegation.js"></script>
+     <script src="js/reset.js"></script>
+     <script src="js/tables.js"></script> -->
+
+    <img src="mesa1.png" alt="Mesa Disponible">
+<img src="mesa2.png" alt="Mesa No Disponible">
+
+    
 </body>
 </html>

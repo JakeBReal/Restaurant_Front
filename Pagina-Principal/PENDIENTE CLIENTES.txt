@@ -1,0 +1,5 @@
+ok vamos a seguir ahora con la opcion de clientes en nuestro menu de la izquierda, quiro que cuando se seleecione la opcion clientes me muestres todos los  clientes acutales diciendome su nombre de cliente, id de cliente y su mesa que estan sentados
+
+
+
+OK AHORA vamos a seguir donde estabamos en la opciones de las selecciones que tenemos a la izquierda en nuestro html, ya que sabes como esta mi base de datos estructurada te vas a vazar en sus respectivos entidades con sus respectivos campos, pero aun no vamos a entrar en lo que es el back end,  quiero solo vazarme en el fron aun,  
