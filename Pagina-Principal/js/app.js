@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     console.log('app.js cargado');
 
     const tablesContainer = document.getElementById('tables-container');
@@ -9,11 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const accountsContainer = document.getElementById('accounts-container');
 
     // Datos iniciales de ejemplo
-    const tables = [
-        { id: 1, capacidad: 4, estado: 'Disponible', cliente: null, total: 0 },
-        { id: 2, capacidad: 2, estado: 'Disponible', cliente: null, total: 0 },
-        { id: 3, capacidad: 6, estado: 'Disponible', cliente: null, total: 0 }
-    ];
+   
+
+    const response = await fetch('http://localhost:3000/mesa');
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    const mesas = await response.json();
+
+    const tables = mesas
 
     const clients = [];
     const menu = [
@@ -22,22 +26,22 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 3, name: 'Ensalada', price: 6 }
     ];
 
-    function renderTables() {
+    const renderTables=() =>{
         tablesContainer.innerHTML = '';
         tableSelect.innerHTML = '<option value="">Seleccione una mesa</option>';
         tables.forEach(table => {
             const tableElement = document.createElement('div');
             tableElement.className = 'table';
             tableElement.innerHTML = `
-                <img src="${table.estado === 'Disponible' ? 'img/table-available.png' : 'img/table-unavailable.png'}" alt="Mesa">
-                <p>Mesa ${table.id} - ${table.estado}</p>
-                ${table.cliente ? `<p>Cliente: ${table.cliente}</p>` : ''}
+                <img src="${table.estado? 'img/table-available.png' : 'img/table-unavailable.png'}" alt="Mesa">
+                <p>Mesa ${table.id_mesa} - ${table.estado ? 'Disponible' : 'Ocupada'}</p>
+                ${table?.cliente ? `<p>Cliente: ${table.cliente}</p>` : ''}
             `;
             tablesContainer.appendChild(tableElement);
-            if (table.estado === 'Disponible') {
+            if (table.estado) {
                 const option = document.createElement('option');
-                option.value = table.id;
-                option.textContent = `Mesa ${table.id}`;
+                option.value = table.id_mesa;
+                option.textContent = `Mesa ${table.id_mesa}`;
                 tableSelect.appendChild(option);
             }
         });

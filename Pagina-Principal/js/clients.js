@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const menuItems = [
-        { id: 1, name: 'Hamburguesa', price: 10, available: true },
+        { id: 1, name: 'd', price: 10, available: true },
         { id: 2, name: 'Pizza', price: 15, available: true },
         { id: 3, name: 'Ensalada', price: 7, available: true },
         { id: 4, name: 'Sopa', price: 5, available: true },

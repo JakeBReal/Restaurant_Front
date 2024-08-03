@@ -1,38 +1,41 @@
-document.addEventListener('DOMContentLoaded', () => {
-    loadMenu();
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadMenu();
 });
 
-function loadMenu() {
-    const menuContainer = document.getElementById('menu-container');
+const  loadMenu=async ()=> {
 
-    // Ejemplo de datos del menú
-    const menuItems = [
-        { id: 1, name: 'Hamburguesa Clásica', price: 8.99, availability: 'available', imageUrl: 'https://via.placeholder.com/250x150.png?text=Hamburguesa' },
-        { id: 2, name: 'Pizza Margarita', price: 12.99, availability: 'unavailable', imageUrl: 'https://via.placeholder.com/250x150.png?text=Pizza' },
-        { id: 3, name: 'Ensalada César', price: 7.99, availability: 'available', imageUrl: 'https://via.placeholder.com/250x150.png?text=Ensalada' },
-        { id: 4, name: 'Pasta Alfredo', price: 11.99, availability: 'available', imageUrl: 'https://via.placeholder.com/250x150.png?text=Pasta' },
-        // Más items del menú aquí
-    ];
 
+    try {
+        const menuContainer = document.getElementById('menu-container');
+
+        // Ejemplo de datos del menú
+       
+        const response = await fetch('http://localhost:3000/menu');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+
+       menuItems = data
     // Cargar los elementos del menú
     menuItems.forEach(item => {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'menu-item';
 
         const img = document.createElement('img');
-        img.src = item.imageUrl;
-        img.alt = item.name;
+        img.src = item.imagen
+        img.alt = item.nombre;
 
         const name = document.createElement('h3');
-        name.textContent = item.name;
+        name.textContent = item.nombre;
 
         const price = document.createElement('p');
-        price.textContent = `$${item.price.toFixed(2)}`;
+        price.textContent = `$${item.precio}`;
 
         const statusSpan = document.createElement('span');
         statusSpan.className = 'menu-status';
-        statusSpan.textContent = item.availability === 'available' ? 'Disponible' : 'No Disponible';
-        statusSpan.style.backgroundColor = item.availability === 'available' ? 'green' : 'red';
+        statusSpan.textContent = item.disponibilidad ? 'Disponible' : 'No Disponible';
+        statusSpan.style.backgroundColor = item.disponibilidad ? 'green' : 'red';
 
         itemDiv.appendChild(img);
         itemDiv.appendChild(name);
@@ -40,4 +43,8 @@ function loadMenu() {
         itemDiv.appendChild(statusSpan);
         menuContainer.appendChild(itemDiv);
     });
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+
 }
