@@ -81,6 +81,8 @@ app.post('/register', async (req, res) => {
   }
 });
 
+
+
 // Iniciar el servidor en el puerto 3000
 app.listen(3000, () => {
   console.log('Servidor iniciado en el puerto 3000');

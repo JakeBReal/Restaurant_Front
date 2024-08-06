@@ -23,7 +23,7 @@
             </div>
 
             <div class="caja_trasera_register">
-                <h3>Aun no tienes tienes cuenta?</h3>
+                <h3>¿Aún no tienes tienes cuenta?</h3>
                 <p>Registrate para que puedas inicar sesion</p>
                  <button id="btn-registarse">Registrarse</button>
                  </div>
@@ -33,7 +33,7 @@
                  <div class="contenedor__login_register">
                     <!-- Login -->
                     <form action="" class="formulario_login">
-                        <h2>Iniciar Sesion</h2>
+                        <h2>Iniciar Sesión</h2>
                         <input type="email" placeholder="Correo Electronico" required>
                         <input type="password" placeholder="Contraseña" required>
                         <button type="submit">Entrar</button>
@@ -70,5 +70,11 @@
         } -->
     </script>
       <script src="script.js"></script>
+      <script>
+        document.getElementById("btn-iniciar_sesion").addEventListener("click", function() {
+            // Lógica de validación de inicio de sesión aquí (si es necesario)
+            window.location.href = "/RestaurantManagement/Front-End/Pagina-Principal.html."; // Redirige a main.html
+        });
+    </script>
 </body>
 </html>

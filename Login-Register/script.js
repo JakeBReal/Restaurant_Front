@@ -2,12 +2,19 @@
 document.getElementById("btn-registarse").addEventListener("click", register);
 document.getElementById("btn-iniciar_sersion").addEventListener("click", iniciarsesion);
 window.addEventListener("resize",anchodepagina);
+
+
+
+
 // DECLARANDO VARIABLE
 var contenedor_login_register = document.querySelector(".contenedor__login_register")
 var formulario_login = document.querySelector(".formulario_login")
 var formulario_registro = document.querySelector(".formulario_registro")
 var caja_trasera_login = document.querySelector(".caja_trasera_login")
 var caja_trasera_register = document.querySelector(".caja_trasera_register")
+
+
+
 
 function anchodepagina(){
     if(window.innerWidth>850){
