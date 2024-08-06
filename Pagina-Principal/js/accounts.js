@@ -1,48 +1,94 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const accountsContainer = document.getElementById('accounts-container');
+    console.log('accounts.js cargado');
 
-    // Ejemplo de datos de clientes y sus cuentas
-    const clients = [
-        { id: 1, name: 'Cliente 1', total: 30, items: [{ name: 'Pizza', price: 10 }, { name: 'Pasta', price: 20 }] },
-        { id: 2, name: 'Cliente 2', total: 20, items: [{ name: 'Ensalada', price: 10 }, { name: 'Sopa', price: 10 }] }
-    ];
+    const accounts = [];
 
-    // Función para renderizar cuentas
     function renderAccounts() {
+        const accountsContainer = document.getElementById('accounts-container');
         accountsContainer.innerHTML = '';
-        clients.forEach(client => {
-            const clientDiv = document.createElement('div');
-            clientDiv.className = 'client-account';
-            clientDiv.innerHTML = `
-                <h3>${client.name}</h3>
+        accounts.forEach(account => {
+            const accountDiv = document.createElement('div');
+            accountDiv.className = 'account';
+            accountDiv.innerHTML = `
+                <h3>Cliente: ${account.name} (Mesa ${account.tableId})</h3>
                 <ul>
-                    ${client.items.map(item => `<li>${item.name} - $${item.price}</li>`).join('')}
+                    ${account.orders.map(order => `<li>${order.name} - ${getCurrencySymbol(account.currency)}${order.price}</li>`).join('')}
                 </ul>
-                <p>Total: $${client.total}</p>
-                <button class="pay-button" data-client-id="${client.id}">Pagar</button>
+                <p>Total: ${getCurrencySymbol(account.currency)}${account.orders.reduce((total, order) => total + order.price, 0)}</p>
+                <button class="pay-button" data-account-id="${account.id}">Pagar</button>
             `;
-            accountsContainer.appendChild(clientDiv);
+            accountsContainer.appendChild(accountDiv);
         });
 
-        // Añadir evento a los botones de pagar
         document.querySelectorAll('.pay-button').forEach(button => {
-            button.addEventListener('click', (event) => {
-                const clientId = event.target.getAttribute('data-client-id');
-                handlePayment(clientId);
+            button.addEventListener('click', (e) => {
+                const accountId = parseInt(e.target.getAttribute('data-account-id'), 10);
+                payAccount(accountId);
             });
         });
     }
 
-    // Función para manejar el pago
-    function handlePayment(clientId) {
-        const clientIndex = clients.findIndex(client => client.id === parseInt(clientId, 10));
-        if (clientIndex !== -1) {
-            clients[clientIndex].total = 0;
-            clients[clientIndex].items = [];
-            alert(`La cuenta de ${clients[clientIndex].name} ha sido pagada.`);
-            renderAccounts();
+    function getCurrencySymbol(currency) {
+        switch (currency) {
+            case 'USD':
+                return '$';
+            case 'DOP':
+                return 'RD$';
+            case 'EUR':
+                return '€';
+            default:
+                return '';
         }
     }
 
-    renderAccounts();
+    function payAccount(accountId) {
+        const accountIndex = accounts.findIndex(account => account.id === accountId);
+        if (accountIndex !== -1) {
+            accounts.splice(accountIndex, 1);
+            renderAccounts();
+            updateClientSelect();
+            alert('Cuenta pagada exitosamente');
+        }
+    }
+
+    function updateClientSelect() {
+        const clientSelect = document.getElementById('client-select');
+        clientSelect.innerHTML = '<option value="">Seleccione un cliente</option>';
+        accounts.forEach(account => {
+            const option = document.createElement('option');
+            option.value = account.id;
+            option.textContent = `${account.name} (Mesa ${account.tableId})`;
+            clientSelect.appendChild(option);
+        });
+    }
+
+    document.getElementById('pay-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const clientSelect = document.getElementById('client-select');
+        const currencySelect = document.getElementById('currency-select');
+
+        const clientId = parseInt(clientSelect.value, 10);
+        const currency = currencySelect.value;
+
+        if (clientId && currency) {
+            const account = accounts.find(account => account.id === clientId);
+            if (account) {
+                account.currency = currency;
+                renderAccounts();
+            }
+        }
+    });
+
+    // Example client added event listener for testing
+    document.addEventListener('clientAdded', (e) => {
+        accounts.push({
+            id: accounts.length + 1,
+            name: e.detail.clientName,
+            tableId: e.detail.tableId,
+            orders: [],
+            currency: 'USD' // Default currency
+        });
+        updateClientSelect();
+        renderAccounts();
+    });
 });

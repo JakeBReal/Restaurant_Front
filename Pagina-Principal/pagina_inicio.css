@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     background-image: url(restaurantFONDO.jpg);
@@ -7,25 +7,39 @@ body {
     background-position: center;
     background-attachment: fixed;
     color: #fff;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Agregado para mejorar la legibilidad del texto */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
-
 
 h1 {
     text-align: center;
-    margin-top: 20px; /* Cambiado de padding-top a margin-top */
+    margin: 0; /* Asegúrate de que no haya margen en la parte superior ni inferior */
+    padding: 20px; /* Ajusta el padding según sea necesario */
+    font-size: 3em;
+    color: #FFD700;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    position: absolute; /* Usa position absolute para colocarlo en la parte superior */
+    width: 100%;
+    top: 0;
+    left: 0;
 }
 
 .container {
     display: flex;
     min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); /* Opacidad reducida para mostrar más fondo */
+    margin-top: 80px; /* Ajusta este valor para que no se superponga con el h1 */
 }
 
 .navbar {
     width: 200px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8); /* Opacidad reducida */
     padding: 20px;
     box-sizing: border-box;
+    border-right: 2px solid #FFD700;
+    position: fixed; /* Asegúrate de que la barra de navegación esté fija */
+    top: 80px; /* Ajusta este valor según el tamaño del h1 */
+    bottom: 0;
+    left: 0;
 }
 
 .navbar ul {
@@ -38,38 +52,28 @@ h1 {
 }
 
 .navbar ul li a {
-    color: #fff;
+    color: #FFD700;
     text-decoration: none;
     display: block;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 215, 0, 0.1);
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
 .navbar ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 215, 0, 0.3);
 }
 
 .content {
     flex: 1;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5); /* Opacidad reducida */
     box-sizing: border-box;
     overflow-y: auto;
+    margin-left: 220px; /* Deja espacio para la barra de navegación */
 }
 
-h2 {
-    border-bottom: 2px solid #fff;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-
-section {
-    margin-bottom: 40px;
-}
-
-/* OCULTAR SECCIONES POR DEFECTO EXPETO LA ACTIVA */
 .section {
     display: none;
 }
@@ -78,42 +82,7 @@ section {
     display: block;
 }
 
-
-/* MESAS */
-
-#tables-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-.table-image {
-    position: relative;
-    width: 200px;
-    height: 150px;
-}
-
-.table-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.table-status {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-
-/* MENUS */
-
+#tables-container,
 #menu-container {
     display: flex;
     flex-wrap: wrap;
@@ -121,7 +90,7 @@ section {
     justify-content: center;
 }
 
-.menu-item {
+.table-image, .menu-item {
     position: relative;
     width: 250px;
     border: 1px solid #ddd;
@@ -133,22 +102,13 @@ section {
     padding: 10px;
 }
 
-.menu-item img {
+.table-image img, .menu-item img {
     width: 100%;
-    height: auto;
+    height: 150px;
+    object-fit: cover;
 }
 
-.menu-item h3 {
-    margin: 10px 0;
-    font-size: 1.2em;
-}
-
-.menu-item p {
-    margin: 5px 0;
-    font-size: 1em;
-}
-
-.menu-status {
+.table-status, .menu-status {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -156,10 +116,14 @@ section {
     color: #fff;
     padding: 5px 10px;
     border-radius: 5px;
-    font-size: 0.9em;
 }
-/* Estilos para el formulario de agregar clientes */
-form#add-client-form {
+
+.menu-item h3, .menu-item p {
+    margin: 10px 0;
+    font-size: 1.2em;
+}
+
+form {
     margin-top: 20px;
     padding: 15px;
     background-color: rgba(0, 0, 0, 0.8);
@@ -167,67 +131,45 @@ form#add-client-form {
     color: #fff;
 }
 
-form#add-client-form label,
-form#add-client-form input,
-form#add-client-form button {
+form label,
+form input,
+form button,
+form select {
     display: block;
     margin-bottom: 10px;
 }
 
-form#add-client-form input,
-form#add-client-form button {
+form input,
+form button,
+form select {
     width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
 }
 
-form#add-client-form button {
+form button {
     background-color: #4CAF50;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-form#add-client-form button:hover {
+form button:hover {
     background-color: #45a049;
 }
 
-
-/* CLIENTES */
-
-#clients-container {
-    display: block; /* Asegúrate de que el contenedor esté visible */
-}
-
-#accounts-container {
-    display: block; /* Asegúrate de que el contenedor esté visible */
-}
-
-.client-account {
+.client-account, .account {
     margin: 10px;
     padding: 10px;
     border: 1px solid #ddd;
-    background-color: #f9f9f9;
-}
-
-.account {
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .client-account p, .account p {
-    color: #333; /* Color de texto visible */
+    color: #333;
 }
-
-.client-account, .account {
-    background-color: #fff; /* Fondo blanco para visibilidad */
-}
- 
-/* ----------------------- */
-
 
 .client-account h3 {
     margin: 0;
@@ -258,4 +200,174 @@ form#add-client-form button:hover {
 
 .pay-button:hover {
     background-color: #cc0000;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .navbar ul {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .content {
+        margin-top: 60px;
+        padding: 10px;
+    }
+
+    .table-image, .menu-item {
+        width: 100%;
+    }
+}
+
+/* Contact Information Section */
+footer {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    text-align: center;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact-info a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-info img.icon {
+    width: 24px;
+    height: 24px;
+    filter: invert(1);
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+
+/* PARA EL APARTADO DE DIVICIONES DE MENU */
+.menu-section {
+    margin-bottom: 40px;
+}
+
+.menu-section h2 {
+    border-bottom: 2px solid #FFD700;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+.menu-item {
+    position: relative;
+    width: calc(33% - 20px); /* Ajusta el ancho según sea necesario */
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 10px;
+    float: left;
+}
+
+.menu-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.menu-item h3 {
+    margin: 10px 0;
+}
+
+.menu-item p {
+    margin: 5px 0;
+}
+
+
+/* Clientes Section Styles */
+/* Clientes Section Styles */
+#clientes-container {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+#clientes-container h2 {
+    color: #FFD700;
+    border-bottom: 2px solid #FFD700;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#add-food-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#add-food-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#add-food-form input, #add-food-form textarea, #add-food-form select, #add-food-form button {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+#add-food-form input, #add-food-form textarea, #add-food-form select {
+    background-color: #fff;
+    color: #333;
+}
+
+#add-food-form button {
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#add-food-form button:hover {
+    background-color: #45a049;
+}
+
+#client-list {
+    margin-top: 20px;
+}
+
+.client-item {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.client-item h3 {
+    margin: 0 0 10px 0;
+}
+
+.client-item p {
+    margin: 5px 0;
+    color: #333;
 }

@@ -40,77 +40,85 @@
                     <!-- Los elementos del menú se cargarán aquí -->
                 </div>
             </section>
+            
             <section id="clients" class="section">
                 <h2>Clientes</h2>
-                <form id="add-food-form">
-                    <label for="client-select">Seleccionar Cliente:</label>
-                    <select id="client-select"></select>
-                    <label for="food-select">Seleccionar Comida:</label>
-                    <select id="food-select"></select>
-                    <button type="submit">Agregar Comida</button>
-                </form>
+               <form id="add-client-form">
+                <label for="occupied-tables">Mesas Ocupadas:</label>
+               <!-- Selección de mesas ocupadas -->
+<select id="occupied-tables">
+    <option value="">Selecciona una mesa ocupada</option>
+</select>
+
+<!-- Selección de ítems del menú -->
+<select id="menu-selection" multiple>
+    <!-- Las opciones se cargarán dinámicamente -->
+</select>
+
+<!-- Nota del cliente -->
+<input type="text" id="client-note" placeholder="Nota">
+
+<!-- Formulario para agregar comida -->
+<form id="add-food-form">
+    <!-- Contenido del formulario -->
+    <button type="submit">Añadir Comida</button>
+</form>
+
+
                 <div id="clients-container">
                     <!-- Los clientes y sus pedidos se mostrarán aquí -->
                 </div>
             </section>
+
             <section id="accounts" class="section">
                 <h2>Cuentas</h2>
                 <div id="accounts-container">
-         <!-- Las cuentas de los clientes se cargarán aquí -->
-                </div>
-
+                    <!-- Las cuentas de los clientes se cargarán aquí -->
+                    <form id="pay-form">
+                        <label for="client-select">Seleccionar Cliente:</label>
+                        <select id="client-select"></select>
                 
+                        <label for="currency-select">Seleccionar Moneda:</label>
+                        <select id="currency-select">
+                            <option value="USD">$ - Dólares (US)</option>
+                            <option value="DOP">RD$ - Pesos Dominicanos (DOP)</option>
+                            <option value="EUR">€ - Euros (EUR)</option>
+                        </select>
+                
+                        <button type="submit">Pagar</button>
+                    </form>
+                </div>
             </section>
+            
             <section id="summary" class="section">
                 <h2>Cuadre</h2>
                 <!-- Contenido de Cuadre -->
             </section>
         </div>
     </div>
-    <!-- <script src="js/accounts.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/clients.js"></script>
+    <footer>
+        <div class="contact-info">
+            <a href="https://wa.me/849-889-1863" target="_blank">
+                <img src="whatsapp-logo.png" alt="WhatsApp" class="icon"> +849-889-1863
+            </a>
+            <a href="https://instagram.com/tu_restaurant" target="_blank">
+                <img src="instagram-logo.png" alt="Instagram" class="icon"> @tu_restaurant
+            </a>
+            <a href="https://goo.gl/maps/yourlocation" target="_blank">
+                <img src="map-logo.png" alt="Location" class="icon"> Nuestra ubicación
+            </a>
+            <a href="mailto:contact@tu_restaurant.com" target="_blank">
+                <img src="email-logo.png" alt="Email" class="icon"> contact@tu_restaurant.com
+            </a>
+        </div>
+    </footer>
     <script src="js/home.js"></script>
-    <script src="js/menu.js"></script>
     <script src="js/navegation.js"></script>
     <script src="js/reset.js"></script>
-    <script src="js/tables.js"></script> -->
-
-     <!--El que esta mejor -->
-     <!-- 
-     <script src="js/home.js"></script> 
-     <script src="js/navegation.js"></script> 
-     <script src="js/reset.js"></script> 
-     <script src="js/tables.js"></script>
-     <script src="js/clients.js"></script>
-     <script src="js/app.js"></script>
-     <script src="js/menu.js"></script>
-     <script src="js/accounts.js"></script>
-      -->
-
-
-     <script src="js/home.js"></script> 
-     <script src="js/navegation.js"></script> 
-     <script src="js/reset.js"></script> 
-     <script src="js/tables.js"></script>
-     <script src="js/menu.js"></script>
-     <script src="js/clients.js"></script>
-     <script src="js/accounts.js"></script>
-     <script src="js/app.js"></script>
-
-<!-- 
-     <script src="js/accounts.js"></script>
-     <script src="js/app.js"></script>
-     <script src="js/clients.js"></script>
-     <script src="js/home.js"></script>
-     <script src="js/menu.js"></script>
-     <script src="js/navegation.js"></script>
-     <script src="js/reset.js"></script>
-     <script src="js/tables.js"></script> -->
-
-    <img src="mesa1.png" alt="Mesa Disponible">
-<img src="mesa2.png" alt="Mesa No Disponible">
-
-    
+    <script src="js/tables.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/clients.js"></script>
+    <script src="js/accounts.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
