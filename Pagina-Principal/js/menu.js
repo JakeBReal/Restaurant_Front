@@ -6,30 +6,14 @@ const loadMenu = async () => {
     try {
         const menuContainer = document.getElementById('menu-container');
 
-        const response = await fetch('http://localhost:3000/menu');
+        const response = await fetch('http://localhost:3000/mesatype');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         const menuItems = await response.json();
+            // Crear un objeto para agrupar los elementos del menú por clasificación
+        const sections = menuItems
 
-        // Crear un objeto para agrupar los elementos del menú por clasificación
-        const sections = {
-            'Desayunos': [],
-            'Entradas': [],
-            'Ensaladas': [],
-            'Bebidas': [],
-            'Postres': [],
-            'Platos Fuertes': [],
-            'Pastas': [],
-            'Comidas Rapidas': []
-        };
-
-        // Agrupar los elementos del menú en las secciones correspondientes
-        menuItems.forEach(item => {
-            if (sections[item.clasificacion]) {
-                sections[item.clasificacion].push(item);
-            }
-        });
 
         // Crear y agregar las secciones al contenedor
         for (const [category, items] of Object.entries(sections)) {
@@ -65,7 +49,6 @@ const loadMenu = async () => {
                 itemDiv.appendChild(statusSpan);
                 sectionDiv.appendChild(itemDiv);
             });
-
             menuContainer.appendChild(sectionDiv);
         }
 

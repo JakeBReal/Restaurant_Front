@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const tableElement = document.createElement('div');
             tableElement.className = 'table';
             tableElement.innerHTML = `
-                <img src="${table.estado? 'img/table-available.png' : 'img/table-unavailable.png'}" alt="Mesa">
+                <img src="${table.imagen}" alt="Mesa">
                 <p>Mesa ${table.id_mesa} - ${table.estado ? 'Disponible' : 'Ocupada'}</p>
                 ${table?.cliente ? `<p>Cliente: ${table.cliente}</p>` : ''}
             `;

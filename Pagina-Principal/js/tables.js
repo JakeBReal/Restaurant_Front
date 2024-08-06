@@ -1,18 +1,19 @@
-document.addEventListener('DOMContentLoaded', async() => {
+document.addEventListener('DOMContentLoaded', () => {
     const tablesContainer = document.getElementById('tables-container');
     const tableSelect = document.getElementById('table-select');
     const addClientForm = document.getElementById('add-client-form');
     const clientNameInput = document.getElementById('client-name');
 
-    const response = await fetch('http://localhost:3000/mesa');
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
-    const mesas = await response.json();
 
-    const tables = mesas
 
-    function renderTables() {
+    const renderTables = async()=> {
+        const response = await fetch('http://localhost:3000/mesa');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const mesas = await response.json();
+    
+        const tables = mesas
         tablesContainer.innerHTML = '';
         tableSelect.innerHTML = '<option value="">Seleccione una mesa</option>';
         tables.forEach(table => {
@@ -27,7 +28,6 @@ document.addEventListener('DOMContentLoaded', async() => {
             statusSpan.className = 'table-status';
             statusSpan.textContent = table.estado ? 'Disponible' : 'No Disponible';
             statusSpan.style.backgroundColor = table.estado  ? 'green' : 'red';
-
             tableDiv.appendChild(img);
             tableDiv.appendChild(statusSpan);
             tablesContainer.appendChild(tableDiv);
@@ -60,8 +60,19 @@ document.addEventListener('DOMContentLoaded', async() => {
                 throw new Error('Network response was not ok');
             }
 
+            const responseMesa= await fetch('http://localhost:3000/mesa', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id_mesa: tableId, status: false }), // Enviar datos en JSON
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
             const result = await response.json();
-            console.log('Cliente agregado:', result);
             clientNameInput.value = '';
 
             const table = tables.find(t => t.id === tableId);

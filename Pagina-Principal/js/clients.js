@@ -23,7 +23,6 @@ const loadOccupiedTables = async () => {
         const tables = await response.json();
         
         // Asegúrate de que estás obteniendo las mesas correctas
-        console.log('Mesas:', tables);
 
         const occupiedTables = tables.filter(table => table.estado === 'no disponible');
         const occupiedTablesSelect = document.getElementById('occupied-tables');
@@ -51,7 +50,6 @@ const loadMenuOptions = async () => {
         const menuItems = await response.json();
         
         // Asegúrate de que estás obteniendo los ítems del menú correctos
-        console.log('Menú:', menuItems);
 
         const menuSelection = document.getElementById('menu-selection');
 
@@ -78,7 +76,6 @@ const loadClients = async () => {
         const clients = await response.json();
         
         // Asegúrate de que estás obteniendo los clientes correctos
-        console.log('Clientes:', clients);
 
         const clientList = document.getElementById('client-container');
         clientList.innerHTML = '';
