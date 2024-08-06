@@ -40,7 +40,7 @@
                     </form>
 
                     <!-- Registro -->
-                    <form action="Login-Register/registro_usuario.js" class="formulario_registro">
+                    <form action="../registro_usuario.js"  method="post"  class="formulario_registro">
                         <h2>Registarse</h2>
                         <input type="text" placeholder="Nombre completo" required name="nombre_completo">
                         <input type="text" placeholder="Correo Electronico" required name="correo">
@@ -53,6 +53,22 @@
             </div>
             </div>
       </main>
+
+      <!-- <script>
+        function handleLogin(event) {
+            event.preventDefault(); // Evita que el formulario se envíe de la manera tradicional
+
+            // Aquí iría la lógica para validar el inicio de sesión (e.g., comparación de usuario/contraseña)
+            const isAuthenticated = true; // Simulación de autenticación exitosa
+
+            if (isAuthenticated) {
+                // Redirige a main.html en la carpeta "mainFolder"
+                window.location.href = '../pagina-principal/paginainicio.html';
+            } else {
+                alert('Credenciales incorrectas');
+            }
+        } -->
+    </script>
       <script src="script.js"></script>
 </body>
 </html>
