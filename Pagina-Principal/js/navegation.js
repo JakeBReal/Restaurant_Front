@@ -10,6 +10,8 @@ document.querySelectorAll('.navbar a').forEach(link => {
     });
 });
 
+
+
 // document.querySelectorAll('.navbar a').forEach(link => {
 //     link.addEventListener('click', (e) => {
 //         e.preventDefault();

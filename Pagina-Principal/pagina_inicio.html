@@ -13,6 +13,8 @@
                 <li><a href="#home">Inicio</a></li>
                 <li><a href="#rooms">Mesas</a></li>
                 <li><a href="#menu">Menú</a></li>
+                <li><a href="#add-food">Agregar Alimentos</a></li> <!-- Nuevo -->
+                <li><a href="#manage-availability">Gestionar Disponibilidad</a></li> <!-- Nuevo -->
                 <li><a href="#clients">Clientes</a></li>
                 <li><a href="#accounts">Cuentas</a></li>
                 <li><a href="#summary">Cuadre</a></li>
@@ -20,11 +22,10 @@
         </nav>
         <div class="content">
             <h1 id="home-title">Bienvenido a D'Jake restaurant</h1>
+            <!-- Secciones existentes -->
             <section id="rooms" class="section">
                 <h2>Mesas</h2>
-                <div id="tables-container">
-                    <!-- Las imágenes de las mesas se cargarán aquí -->
-                </div>
+                <div id="tables-container"></div>
                 <form id="add-client-form">
                     <h3>Agregar Cliente a Mesa</h3>
                     <label for="table-select">Seleccionar Mesa:</label>
@@ -36,66 +37,76 @@
             </section>
             <section id="menu" class="section">
                 <h2>Menú</h2>
-                <div id="menu-categories">
-                    <!-- Botones de categorías se generarán aquí -->
-                </div>
-                <div id="menu-container">
-                    <!-- Las secciones del menú se cargarán aquí -->
-                </div>
+                <div id="menu-categories"></div>
+                <div id="menu-container"></div>
             </section>
-            
+            <section id="add-food" class="section">
+                <h2>Agregar Alimentos</h2>
+                <form id="add-food-form">
+                    <label for="food-name">Nombre del Alimento:</label>
+                    <input type="text" id="food-name" required>
+                    <label for="food-description">Descripción:</label>
+                    <input type="text" id="food-description" required>
+                    <label for="food-price">Precio:</label>
+                    <input type="number" id="food-price" step="0.01" required>
+                    <label for="food-image">URL de Imagen:</label>
+                    <input type="text" id="food-image" required>
+                    <label for="food-type">Tipo:</label>
+                    <select id="food-type">
+                        <option value="Desayunos">Desayunos</option>
+                        <option value="Entradas">Entradas</option>
+                        <option value="Ensaladas">Ensaladas</option>
+                        <option value="Bebidas">Bebidas</option>
+                        <option value="Postres">Postres</option>
+                        <option value="Platos Fuertes">Platos Fuertes</option>
+                        <option value="Pastas">Pastas</option>
+                        <option value="Comidas Rapidas">Comidas Rápidas</option>
+                    </select>
+                    <button type="submit">Añadir Alimento</button>
+                </form>
+            </section>
+            <section id="manage-availability" class="section">
+                <h2>Gestionar Disponibilidad</h2>
+                <form id="availability-form">
+                    <label for="menu-selection">Seleccionar Alimentos:</label>
+                    <select id="menu-selection" multiple>
+                        <!-- Opciones de alimentos se cargarán aquí -->
+                    </select>
+                    <button type="submit">Actualizar Disponibilidad</button>
+                </form>
+            </section>
             <section id="clients" class="section">
                 <h2>Clientes</h2>
-               <form id="add-client-form">
-                <label for="occupied-tables">Mesas Ocupadas:</label>
-               <!-- Selección de mesas ocupadas -->
-<select id="occupied-tables">
-    <option value="">Selecciona una mesa ocupada</option>
-</select>
-
-<!-- Selección de ítems del menú -->
-<select id="menu-selection" multiple>
-    <!-- Las opciones se cargarán dinámicamente -->
-</select>
-
-<!-- Nota del cliente -->
-<input type="text" id="client-note" placeholder="Nota">
-
-<!-- Formulario para agregar comida -->
-<form id="add-food-form">
-    <!-- Contenido del formulario -->
-    <button type="submit">Añadir Comida</button>
-</form>
-
-
-                <div id="clients-container">
-                    <!-- Los clientes y sus pedidos se mostrarán aquí -->
-                </div>
+                <form id="add-client-form">
+                    <label for="occupied-tables">Mesas Ocupadas:</label>
+                    <select id="occupied-tables">
+                        <option value="">Selecciona una mesa ocupada</option>
+                    </select>
+                    <select id="menu-selection" multiple></select>
+                    <input type="text" id="client-note" placeholder="Nota">
+                    <button type="submit">Añadir Cliente</button>
+                </form>
+                <div id="clients-container"></div>
             </section>
-
             <section id="accounts" class="section">
                 <h2>Cuentas</h2>
                 <div id="accounts-container">
-                    <!-- Las cuentas de los clientes se cargarán aquí -->
                     <form id="pay-form">
                         <label for="client-select">Seleccionar Cliente:</label>
                         <select id="client-select"></select>
-                
                         <label for="currency-select">Seleccionar Moneda:</label>
                         <select id="currency-select">
                             <option value="USD">$ - Dólares (US)</option>
                             <option value="DOP">RD$ - Pesos Dominicanos (DOP)</option>
                             <option value="EUR">€ - Euros (EUR)</option>
                         </select>
-                
                         <button type="submit">Pagar</button>
                     </form>
                 </div>
             </section>
-            
             <section id="summary" class="section">
                 <h2>Cuadre</h2>
-                <!-- Contenido de Cuadre -->
+                <div id="summary-container"></div>
             </section>
         </div>
     </div>
@@ -123,5 +134,6 @@
     <script src="js/clients.js"></script>
     <script src="js/accounts.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/cuadre.js"></script>
 </body>
 </html>
