@@ -48,29 +48,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (tableId && clientName) {
 
-            const response = await fetch('http://localhost:3000/cliente', {
+            let response = await fetch('http://localhost:3000/cliente', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ nombre: clientName, mesa_id: tableId }), // Enviar datos en JSON
             });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+            response = await response.json()
+            // if (!response.ok) {
+            //     throw new Error('Network response was not ok');
+            // }
 
             const responseMesa= await fetch('http://localhost:3000/mesa', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id_mesa: tableId, status: false }), // Enviar datos en JSON
+                body: JSON.stringify({ id_mesa: tableId,id_cliente:response.id_cliente, status: false }), // Enviar datos en JSON
             });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+         
 
             const result = await response.json();
             clientNameInput.value = '';

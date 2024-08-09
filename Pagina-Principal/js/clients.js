@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     await loadOccupiedTables();
     await loadMenuOptions();
-    await loadClients();
+   // await loadClients();
 
     const form = document.getElementById('add-food-form');
     form.addEventListener('submit', async (e) => {
@@ -17,14 +17,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Cargar mesas ocupadas
 const loadOccupiedTables = async () => {
     try {
-        const response = await fetch('http://localhost:3000/tables');
+        const response = await fetch('http://localhost:3000/mesaOcupada');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        const tables = await response.json();
+        const occupiedTables = await response.json();
 
-        // Filtra las mesas ocupadas
-        const occupiedTables = tables.filter(table => table.estado === 'no disponible');
         const occupiedTablesSelect = document.getElementById('occupied-tables');
 
         // Limpia el select antes de agregar nuevas opciones
@@ -33,7 +31,7 @@ const loadOccupiedTables = async () => {
         occupiedTables.forEach(table => {
             const option = document.createElement('option');
             option.value = table.id_mesa;
-            option.textContent = `Mesa ${table.id_mesa} - ${table.nombre_cliente}`;
+            option.textContent = `Mesa ${table.id_mesa} - ${table.nombre}`;
             occupiedTablesSelect.appendChild(option);
         });
     } catch (error) {
@@ -68,7 +66,7 @@ const loadMenuOptions = async () => {
 // Cargar clientes
 const loadClients = async () => {
     try {
-        const response = await fetch('http://localhost:3000/clientes');
+        const response = await fetch('http://localhost:3000/cliente');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
