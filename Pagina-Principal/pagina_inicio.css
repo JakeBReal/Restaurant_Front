@@ -407,3 +407,11 @@ footer {
 .account-item p {
     margin: 5px 0;
 }
+
+
+#menu-selection {
+    margin: 20px;
+}
+.menu-item {
+    margin-bottom: 10px;
+}

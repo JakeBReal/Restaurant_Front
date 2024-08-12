@@ -1,20 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('accounts.js cargado');
+    let accounts = [];
 
-    const accounts = [];
+    const renderAccounts=async() =>{
 
-    function renderAccounts() {
+        const response = await fetch('http://localhost:3000/getTotalCuenta');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        accounts = await response.json();
+
+
         const accountsContainer = document.getElementById('accounts-container');
         accountsContainer.innerHTML = '';
         accounts.forEach(account => {
             const accountDiv = document.createElement('div');
             accountDiv.className = 'account';
             accountDiv.innerHTML = `
-                <h3>Cliente: ${account.name} (Mesa ${account.tableId})</h3>
+                <h3>Cliente: ${account.nombre} (Mesa ${account.tableId})</h3>
                 <ul>
-                    ${account.orders.map(order => `<li>${order.name} - ${getCurrencySymbol(account.currency)}${order.price}</li>`).join('')}
+                    ${account.orders.map(order => `<li>${order.nombre} - ${getCurrencySymbol(account.currency)}${order.precio}</li>`).join('')}
                 </ul>
-                <p>Total: ${getCurrencySymbol(account.currency)}${account.orders.reduce((total, order) => total + order.price, 0)}</p>
+                <p>Total: ${getCurrencySymbol(account.currency)}${account.total}</p>
                 <button class="pay-button" data-account-id="${account.id}">Pagar</button>
             `;
             accountsContainer.appendChild(accountDiv);
@@ -91,7 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
         updateClientSelect();
         renderAccounts();
     });
+
+renderAccounts()
+
 });
+
+
 
 // document.addEventListener('DOMContentLoaded', () => {
 //     const accountsContainer = document.getElementById('accounts-container');

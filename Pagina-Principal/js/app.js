@@ -26,7 +26,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         { id: 3, name: 'Ensalada', price: 6 }
     ];
 
-    const renderTables=() =>{
+    const renderTables=async () =>{
+
+        const response = await fetch('http://localhost:3000/mesa');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const mesas = await response.json();
+    
+        const tables = mesas
+
         tablesContainer.innerHTML = '';
         tableSelect.innerHTML = '<option value="">Seleccione una mesa</option>';
         tables.forEach(table => {

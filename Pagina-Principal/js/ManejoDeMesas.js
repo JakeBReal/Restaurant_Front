@@ -70,7 +70,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
          
 
-            const result = await response.json();
+
+            
+            const responseMesa2= await fetch('http://localhost:3000/addCuenta', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id_cliente:response.id_cliente}), // Enviar datos en JSON
+            });
+
+         
+
             clientNameInput.value = '';
 
             const table = tables.find(t => t.id === tableId);
@@ -87,9 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.dispatchEvent(event);
             }
         }
+    renderTables();
+
     });
 
-    renderTables();
 });
 
 
