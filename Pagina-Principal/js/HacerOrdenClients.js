@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const form = document.getElementById("add-food-form");
   form.addEventListener("submit", async (e) => {
-    e.preventDefault(); // Evita la recarga de la página
+   // e.preventDefault(); // Evita la recarga de la página
     addFoodToTable();
     form.reset();
     loadClients(); // Refresca la lista de clientes
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const form1 = document.getElementById("add-food-form1");
   form1.addEventListener("submit", async (e) => {
-    e.preventDefault(); // Evita la recarga de la página
+   // e.preventDefault(); // Evita la recarga de la página
     addFoodToTable();
     form1.reset();
     loadClients(); // Refresca la lista de clientes
