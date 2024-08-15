@@ -20,6 +20,10 @@
                 <li><a href="#clients">Clientes</a></li>
                 <li><a href="#accounts">Cuentas</a></li>
                 <li><a href="#summary">Cuadre</a></li>
+
+                <!-- Nueva opción -->
+                <li><a href="#inventory" id="inventory-nav">Inventario de alimentos</a></li> 
+
             </ul>
         </nav>
 
@@ -89,6 +93,9 @@
             </section>
 
 
+            
+
+
 
 
             <section id="clients" class="section">
@@ -144,6 +151,27 @@
 
 
 
+
+            <div id="inventory-section" style="display: none;">
+                <h2>Consulta de Inventario</h2>
+                <table id="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Los datos del inventario se agregarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+            
+
+            
+
+
+
         </div>
     </div>
 
@@ -176,11 +204,10 @@
     <script src="js/AreaDeCobro.js"></script>
     <script src="js/app.js"></script>
     <script src="js/cuadre.js"></script>
+    <script src="js/inventario.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            loadMenuOptions();
-        });
+    
+     
     </script>
 </body>
 </html>
