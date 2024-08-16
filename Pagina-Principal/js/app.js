@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('app.js cargado');
 
@@ -168,63 +170,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     renderTables();
+
+    // main.js
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+  loadOccupiedTables();
+  loadMenuOptions1();
+  loadClients();
+
+  const form = document.getElementById("add-food-form");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // Evita la recarga de la página
+    await addFoodToTable();
+    form.reset();
+    await loadClients(); // Refresca la lista de clientes
+  });
+
+  const form1 = document.getElementById("add-food-form1");
+  form1.addEventListener("submit", async (e) => {
+    e.preventDefault(); // Evita la recarga de la página
+    await addFoodToTable();
+    form1.reset();
+    await loadClients(); // Refresca la lista de clientes
+  });
 });
 
-// document.addEventListener('DOMContentLoaded', async () => {
-//     await fetchTables();
-//     await fetchClients();
-//     await fetchMenu();
-
-//     document.getElementById('pay-button').addEventListener('click', async () => {
-//         await payForTable();
-//     });
-// });
-
-// const fetchTables = async () => {
-//     try {
-//         const response = await fetch('http://localhost:3000/mesa');
-//         if (!response.ok) throw new Error('Network response was not ok');
-//         const tables = await response.json();
-//         // Update the UI with tables data
-//     } catch (error) {
-//         console.error('Error fetching tables:', error);
-//     }
-// };
-
-// const fetchClients = async () => {
-//     try {
-//         const response = await fetch('http://localhost:3000/clientes');
-//         if (!response.ok) throw new Error('Network response was not ok');
-//         const clients = await response.json();
-//         // Update the UI with clients data
-//     } catch (error) {
-//         console.error('Error fetching clients:', error);
-//     }
-// };
-
-// const fetchMenu = async () => {
-//     try {
-//         const response = await fetch('http://localhost:3000/menu');
-//         if (!response.ok) throw new Error('Network response was not ok');
-//         const menuItems = await response.json();
-//         // Update the UI with menu data
-//     } catch (error) {
-//         console.error('Error fetching menu:', error);
-//     }
-// };
-
-// const payForTable = async () => {
-//     try {
-//         const response = await fetch('http://localhost:3000/pagar', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//         });
-
-//         if (!response.ok) throw new Error('Network response was not ok');
-//         // Handle the payment success
-//     } catch (error) {
-//         console.error('Error paying for table:', error);
-//     }
-// };
+});

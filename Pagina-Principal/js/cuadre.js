@@ -5,19 +5,24 @@ document.addEventListener('DOMContentLoaded', () => {
             id_cuenta: 1,
             nombre_cliente: 'Juan Pérez',
             mesa: 5,
-            fecha: '2024-08-05'
+            fecha: '2024-08-05',
+            Valor_de_la_cuenta: 2500
         },
         {
             id_cuenta: 2,
             nombre_cliente: 'María Gómez',
             mesa: 3,
             fecha: '2024-08-05'
+            ,
+            Valor_de_la_cuenta: 5000
         },
         {
             id_cuenta: 3,
             nombre_cliente: 'Carlos Rodríguez',
             mesa: 7,
             fecha: '2024-08-05'
+            ,
+            Valor_de_la_cuenta: 7350
         }
     ];
 
@@ -41,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p><strong>Nombre del Cliente:</strong> ${item.nombre_cliente}</p>
                 <p><strong>Mesa:</strong> ${item.mesa}</p>
                 <p><strong>Fecha:</strong> ${item.fecha}</p>
+                <p><strong>Valor_de_la_cuenta:</strong> ${item.Valor_de_la_cuenta}</p>
             `;
 
             container.appendChild(accountDiv);

@@ -49,3 +49,5 @@ const loadInventory = () => {
         inventoryTableBody.appendChild(row);
     });
 };
+
+

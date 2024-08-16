@@ -13,6 +13,7 @@
         <nav class="navbar">
             <ul>
                 <li><a href="#home">Inicio</a></li>
+                <li><a href="#add-rooms">Agregar Mesas</a></li>
                 <li><a href="#rooms">Mesas</a></li>
                 <li><a href="#menu">Menú</a></li>
                 <li><a href="#add-food">Agregar Alimentos</a></li> <!-- Nuevo -->
@@ -30,8 +31,72 @@
         <div class="content">
             <h1 id="home-title">Bienvenido a D'Jake restaurant</h1>
 
+ <!-- Sección de "Agregar Mesas" -->
+ <div id="add-rooms" style="display: none;">
+    <h2>Añadir Mesa</h2>
+    <form id="addTableForm">
+        <label for="capacidad">Capacidad:</label>
+        <input type="number" id="capacidad" name="capacidad" required>
+        
+        
+        
+        <label for="imagen">Imagen URL:</label>
+        <input type="text" id="imagen" name="imagen">
+        
+        <button type="submit">Añadir Mesa</button>
+    </form>
 
-            <!-- Secciones existentes -->
+    <div id="mesasList">
+        <h3>Mesas Añadidas</h3>
+        <ul id="mesas"></ul>
+    </div>
+</div>
+
+<script>
+    // Manejar el clic en los enlaces de la navegación
+    document.querySelectorAll('nav a[href^="#"]').forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault(); // Previene el comportamiento predeterminado del enlace
+
+            // Ocultar todas las secciones
+            document.querySelectorAll('div[id^="add-"], div[id^="other-section"]').forEach(function(section) {
+                section.style.display = 'none';
+            });
+
+            // Mostrar la sección correspondiente
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.style.display = 'block';
+            }
+        });
+    });
+
+    // Manejar el formulario para añadir una mesa
+    document.getElementById('addTableForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Previene el comportamiento por defecto del formulario
+
+        const capacidad = document.getElementById('capacidad').value;
+        const estado = document.getElementById('estado').value;
+        const imagen = document.getElementById('imagen').value || 'https://via.placeholder.com/100'; // Imagen por defecto
+
+        // Crear un nuevo elemento de lista para la mesa añadida
+        const newMesa = document.createElement('li');
+        newMesa.innerHTML = `
+            <strong>Capacidad:</strong> ${capacidad} <br>
+            <strong>Estado:</strong> ${estado} <br>
+            <img src="${imagen}" alt="Imagen de la mesa" style="width: 100px; height: 100px;"><br>
+        `;
+
+        // Añadir la nueva mesa a la lista
+        document.getElementById('mesas').appendChild(newMesa);
+
+        // Limpiar el formulario después de añadir la mesa
+        document.getElementById('addTableForm').reset();
+    });
+</script>
+
+
+            <!-- Mesas existentes -->
             <section id="rooms" class="section">
                 <h2>Mesas</h2>
                 <div id="tables-container"></div>
@@ -51,6 +116,7 @@
                 <h2>Menú</h2>
                 <div id="menu-categories"></div>
                 <div id="menu-container"></div>
+                
             </section>
 
             
@@ -89,36 +155,47 @@
                     <div id="menu-selection">
                         <!-- Opciones de alimentos se cargarán aquí -->
                     </div>
+
                 </form>
             </section>
 
+<!-- Sección para seleccionar alimentos -->
 
             
 
 
 
 
-            <section id="clients" class="section">
-                <h2>Clientes</h2>
-                <div id="client-container"></div>
-            
-                <h3>Agregar Comidas a la Mesa</h3>
-                <form id="add-food-form1">
-                    <label for="occupied-tables">Seleccionar Mesa Ocupada:</label>
-                    <select id="occupied-tables">
-                        <!-- Opciones estáticas para demostración -->
-                    </select>
-                    
-                    
-               
+                                    <section id="clients" class="section">
+                                        <h2>Clientes</h2>
+                                        <div id="client-container"></div>
 
-                    <div id="menu-selection1">
-                        <!-- Opciones de alimentos se cargarán aquí -->
-                    </div>
-                    
-                    <button type="submit">Agregar Comida</button>
-                </form>
-            </section>
+                                        <h3>Agregar Comidas a la Mesa</h3>
+                                        <form id="add-food-form1">
+                                            <label for="occupied-tables">Seleccionar Mesa Ocupada:</label>
+                                            <select id="occupied-tables">
+                                                <!-- Opciones estáticas para demostración -->
+                                            </select>
+
+                                            <label for="food-selection">Seleccionar Alimento:</label>
+                                            <select id="food-selection">
+                                                <option value="">--Selecciona un alimento--</option>
+                                            </select>
+
+                                            <div id="food-controls" style="display: none;">
+                                                <span id="selected-food-name"></span>
+                                                <div class="quantity-control">
+                                                    <button type="button" id="minus-button">-</button>
+                                                    <span id="quantity-display">0</span>
+                                                    <button type="button" id="plus-button">+</button>
+                                                </div>
+                                            </div>
+
+                                            <button type="submit">Agregar Comida</button>
+                                            <button type="button" id="edit-button">Editar</button> <!-- Botón de editar -->
+                                        </form>
+                                    </section>
+
 
 
 
@@ -152,20 +229,23 @@
 
 
 
-            <div id="inventory-section" style="display: none;">
-                <h2>Consulta de Inventario</h2>
-                <table id="inventory-table">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Stock</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Los datos del inventario se agregarán aquí dinámicamente -->
-                    </tbody>
-                </table>
-            </div>
+            <!-- Sección para Inventario -->
+<div id="inventory-section" class="section">
+    <h2>Inventario de Alimentos</h2>
+    <table id="inventory-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Las filas del inventario se agregarán aquí dinámicamente -->
+        </tbody>
+    </table>
+</div>
+
             
 
             
@@ -205,7 +285,9 @@
     <script src="js/app.js"></script>
     <script src="js/cuadre.js"></script>
     <script src="js/inventario.js"></script>
-
+    <script src="js/ComidaDisponible.js"></script>
+    <script src="js/OrdenarComida.js"></script>
+    
     
      
     </script>
