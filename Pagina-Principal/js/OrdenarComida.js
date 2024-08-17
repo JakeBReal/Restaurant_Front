@@ -74,42 +74,8 @@ const loadOccupiedTables = async () => {
 
 
 
-                document.getElementById('addTableForm').addEventListener('submit', function(event) {
-                  event.preventDefault(); // Previene el comportamiento por defecto del formulario
                 
-                  const capacidad = document.getElementById('capacidad').value;
-                  const estado = document.getElementById('estado').value;
-                  const imagen = document.getElementById('imagen').value || 'https://via.placeholder.com/100'; // Imagen por defecto
-                
-                  // Crear un nuevo elemento de lista para la mesa añadida
-                  const newMesa = document.createElement('li');
-                  newMesa.innerHTML = `
-                    <strong>Capacidad:</strong> ${capacidad} <br>
-                    <strong>Estado:</strong> ${estado} <br>
-                    <img src="${imagen}" alt="Imagen de la mesa" style="width: 100px; height: 100px;"><br>
-                  `;
-                
-                  // Añadir la nueva mesa a la lista
-                  document.getElementById('mesas').appendChild(newMesa);
-                
-                  // Limpiar el formulario después de añadir la mesa
-                  document.getElementById('addTableForm').reset();
-                });
-                
-                  
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
   
   const addFoodToTable = async () => {
     const foodNameInput = document.getElementById("food-name");

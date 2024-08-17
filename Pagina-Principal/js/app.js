@@ -4,7 +4,79 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log('app.js cargado');
 
 
-    
+          
+    const response1 = await fetch('http://localhost:3000/mesa');
+    if (!response1.ok) {
+        throw new Error('Network response was not ok');
+    }
+    const mesas1 = await response1.json();
+    const mesasContainer = document.getElementById('mesas');
+    mesasContainer.innerHTML = '';
+
+    for (const mesa of mesas1) {
+
+        const newMesa = document.createElement('li');
+        newMesa.innerHTML = `
+            <strong>Capacidad:</strong> ${mesa.capacidad} <br>
+            <strong>Estado:</strong> ${mesa.estado} <br>
+            <img src="${mesa.imagen}" alt="Imagen de la mesa" style="width: 100px; height: 100px;"><br>
+        `;
+
+        // Añadir la nueva mesa a la lista
+        mesasContainer.appendChild(newMesa);
+    }
+
+  const p = document.getElementById('addTableForm');
+    document.getElementById('addTableForm').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Previene el comportamiento por defecto del formulario
+        const capacidad = document.getElementById('capacidad').value;
+        const imagen = document.getElementById('imagen').value 
+        const responseMesa = await fetch('http://localhost:3000/addMenus', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+              capacidad,
+                imagen
+
+            }), // Enviar datos en JSON
+        });
+
+        
+    const response = await fetch('http://localhost:3000/mesa');
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    const mesas = await response.json();
+    const mesasContainer = document.getElementById('mesas');
+    mesasContainer.innerHTML = '';
+
+    for (const mesa of mesas) {
+
+        const newMesa = document.createElement('li');
+        newMesa.innerHTML = `
+            <strong>Capacidad:</strong> ${mesa.capacidad} <br>
+            <strong>Estado:</strong> ${mesa.estado} <br>
+            <img src="${mesa.imagen}" alt="Imagen de la mesa" style="width: 100px; height: 100px;"><br>
+        `;
+
+        // Añadir la nueva mesa a la lista
+        mesasContainer.appendChild(newMesa);
+    }
+
+    p.reset();
+
+    });
+      
+
+
+    const accountsMenu = document.getElementById('mesas1');
+
+    accountsMenu.addEventListener('click', () => {
+        renderTables();
+    });
+
    
 
     const tablesContainer = document.getElementById('tables-container');
