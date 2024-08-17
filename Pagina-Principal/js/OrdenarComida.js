@@ -114,6 +114,7 @@ const loadOccupiedTables = async () => {
   const addFoodToTable = async () => {
     const foodNameInput = document.getElementById("food-name");
     const foodDescriptionInput = document.getElementById("food-description");
+    const cantidad = document.getElementById("food-cantidad");
     const foodPriceInput = document.getElementById("food-price");
     const foodImageInput = document.getElementById("food-image");
     const foodTypeSelect = document.getElementById("food-type");
@@ -124,6 +125,8 @@ const loadOccupiedTables = async () => {
     const foodPrice = foodPriceInput.value;
     const foodImage = foodImageInput.value;
     const foodType = foodTypeSelect.value;
+    const foodCantidad = cantidad.value;
+
   
     const disponibilidad = true;
   
@@ -139,7 +142,8 @@ const loadOccupiedTables = async () => {
           precio: foodPrice,
           disponibilidad: disponibilidad,
           imagen: foodImage,
-          tipo: foodType
+          tipo: foodType,
+          cantidad: foodCantidad
         }), // Enviar datos en JSON
       });
   

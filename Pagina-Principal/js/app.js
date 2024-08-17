@@ -3,6 +3,10 @@
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('app.js cargado');
 
+
+    
+   
+
     const tablesContainer = document.getElementById('tables-container');
     const tableSelect = document.getElementById('table-select');
     const addClientForm = document.getElementById('add-client-form');
@@ -80,6 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     function renderAccounts() {
+        renderTables();
         accountsContainer.innerHTML = '';
         tables.forEach(table => {
             if (table.cliente) {

@@ -1,32 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+    
     // Datos locales de ejemplo
-    const localData = [
-        {
-            id_cuenta: 1,
-            nombre_cliente: 'Juan Pérez',
-            mesa: 5,
-            fecha: '2024-08-05',
-            Valor_de_la_cuenta: 2500
-        },
-        {
-            id_cuenta: 2,
-            nombre_cliente: 'María Gómez',
-            mesa: 3,
-            fecha: '2024-08-05'
-            ,
-            Valor_de_la_cuenta: 5000
-        },
-        {
-            id_cuenta: 3,
-            nombre_cliente: 'Carlos Rodríguez',
-            mesa: 7,
-            fecha: '2024-08-05'
-            ,
-            Valor_de_la_cuenta: 7350
-        }
-    ];
 
-    function loadSummary() {
+    const accountsMenu = document.getElementById('cuadre1');
+
+    accountsMenu.addEventListener('click', () => {
+        loadSummary();
+    });
+
+
+
+    const  loadSummary=async ()=> {
+
+        const response = await fetch('http://localhost:3000/getCuandre');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        let localData = await response.json();
+
         const container = document.getElementById('summary-container');
 
         if (!container) {
@@ -43,10 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             accountDiv.innerHTML = `
                 <h3>Cuenta #${item.id_cuenta}</h3>
-                <p><strong>Nombre del Cliente:</strong> ${item.nombre_cliente}</p>
-                <p><strong>Mesa:</strong> ${item.mesa}</p>
+                <p><strong>Nombre del Cliente:</strong> ${item.nombre}</p>
+                <p><strong>Mesa:</strong> ${item.id_mesa}</p>
                 <p><strong>Fecha:</strong> ${item.fecha}</p>
-                <p><strong>Valor_de_la_cuenta:</strong> ${item.Valor_de_la_cuenta}</p>
+                <p><strong>Valor_de_la_cuenta:</strong> ${item.total}</p>
             `;
 
             container.appendChild(accountDiv);

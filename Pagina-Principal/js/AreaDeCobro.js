@@ -2,14 +2,18 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('accounts.js cargado');
     let accounts = [];
 
-    const renderAccounts=async() =>{
+    const accountsMenu = document.getElementById('prueba');
 
+    accountsMenu.addEventListener('click', () => {
+        renderAccounts();
+    });
+
+    const renderAccounts=async() =>{
         const response = await fetch('http://localhost:3000/getTotalCuenta');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         accounts = await response.json();
-
 
         const accountsContainer = document.getElementById('accounts-container');
         accountsContainer.innerHTML = '';
@@ -22,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${account.orders.map(order => `<li>${order.nombre} - ${getCurrencySymbol(account.currency)}${order.precio}</li>`).join('')}
                 </ul>
                 <p>Total: ${getCurrencySymbol(account.currency)}${account.total}</p>
-                <button class="pay-button" data-account-id="${account.id}">Pagar</button>
+                <button class="pay-button" data-mesa-id="${account.tableId}" data-account-id="${account.id_cuenta}" data-cliente-id="${account.id}" data-total-id="${account.total}">Pagar</button>
             `;
             accountsContainer.appendChild(accountDiv);
         });
@@ -30,7 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.pay-button').forEach(button => {
             button.addEventListener('click', (e) => {
                 const accountId = parseInt(e.target.getAttribute('data-account-id'), 10);
-                payAccount(accountId);
+                const cliente = parseInt(e.target.getAttribute('data-cliente-id'), 10);
+                const total = parseInt(e.target.getAttribute('data-total-id'), 10);
+                const tableId = parseInt(e.target.getAttribute('data-mesa-id'), 10);
+
+
+               payAccount(accountId,cliente,total,tableId);
             });
         });
     }
@@ -48,14 +57,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function payAccount(accountId) {
-        const accountIndex = accounts.findIndex(account => account.id === accountId);
-        if (accountIndex !== -1) {
-            accounts.splice(accountIndex, 1);
+    function payAccount(accountId,cliente,total,id_mesa) {
+        fetch('http://localhost:3000/pagarCuenta', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id_cuenta: accountId, id_cliente: cliente,total,id_mesa }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Cuenta pagada:', data);
             renderAccounts();
-            updateClientSelect();
-            alert('Cuenta pagada exitosamente');
-        }
+        })
+        .catch(error => {
+            console.error('Error paying account:', error);
+        });
+      
     }
 
     function updateClientSelect() {
@@ -102,3 +125,4 @@ document.addEventListener('DOMContentLoaded', () => {
 renderAccounts()
 
 });
+

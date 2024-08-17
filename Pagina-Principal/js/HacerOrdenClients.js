@@ -14,16 +14,41 @@ document.addEventListener("DOMContentLoaded", async () => {
     // document.querySelector('.navbar ul li a[href="#clients"]').click();
   });
 
+  const addFoodToCliente= async () => {
+
+   const occupiedTablesSelect = document.getElementById("occupied-tables")
+   const foodSelection = document.getElementById("food-selection")
+
+   let cantidad = prompt("¿Cuántas cantidad de esta comida quieres pedir?");
+   cantidad = parseInt(cantidad, 10);
+
+   const responseMesa= await fetch('http://localhost:3000/addComidaCliente', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id_cliente:occupiedTablesSelect.value,id_menu:foodSelection.value,disponibilidad:true,cantidad}), // Enviar datos en JSON
+});
+
+loadClients()
+
+    
+  };
+  
+
 
   const form1 = document.getElementById("add-food-form1");
   form1.addEventListener("submit", async (e) => {
-   // e.preventDefault(); // Evita la recarga de la página
-    addFoodToTable();
-    form1.reset();
-    loadClients(); // Refresca la lista de clientes
+    e.preventDefault();
+    addFoodToCliente();
+ 
+    // addFoodToTable();
+    // form1.reset();
+    // loadClients(); // Refresca la lista de clientes
     // Mantener la pestaña activa
     // document.querySelector('.navbar ul li a[href="#clients"]').click();
   });
+
 });
 
 
@@ -232,6 +257,8 @@ const addFoodToTable = async () => {
   const foodPriceInput = document.getElementById("food-price");
   const foodImageInput = document.getElementById("food-image");
   const foodTypeSelect = document.getElementById("food-type");
+  const cantidad = document.getElementById("food-cantidad");
+
 
   // Obtener los valores de los inputs
   const foodName = foodNameInput.value;
@@ -239,6 +266,8 @@ const addFoodToTable = async () => {
   const foodPrice = foodPriceInput.value;
   const foodImage = foodImageInput.value;
   const foodType = foodTypeSelect.value;
+  const foodCantidad = cantidad.value;
+
 
 
 const disponibilidad = true;
@@ -255,7 +284,8 @@ const disponibilidad = true;
         precio: foodPrice,
         disponibilidad: disponibilidad,
         imagen: foodImage,
-        tipo: foodType
+        tipo: foodType,
+        cantidad: foodCantidad
       }), // Enviar datos en JSON
     });
 

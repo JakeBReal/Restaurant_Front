@@ -1,13 +1,15 @@
 // Datos estáticos de inventario
-const inventoryData = [
-    { id_menu: 1, nombre: 'Hamburguesa', stock: 10 },
-    { id_menu: 2, nombre: 'Pizza', stock: 8 },
-    { id_menu: 3, nombre: 'Ensalada', stock: 15 },
-    { id_menu: 4, nombre: 'Bebida', stock: 20 },
-    // Agrega más artículos según sea necesario
-];
+
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    const accountsMenu = document.getElementById('inventory-nav');
+
+    accountsMenu.addEventListener('click', () => {
+        loadInventory();
+    });
+
+
     const inventoryNav = document.getElementById("inventory-nav");
     const inventorySection = document.getElementById("inventory-section");
     const navLinks = document.querySelectorAll(".navbar a"); // Selecciona todos los enlaces del menú de navegación
@@ -31,7 +33,17 @@ document.addEventListener("DOMContentLoaded", () => {
     loadInventory();
 });
 
-const loadInventory = () => {
+
+
+const loadInventory = async () => {
+    let inventoryData = []
+
+    const response = await fetch('http://localhost:3000/menu');
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    inventoryData = await response.json();
+
     const inventoryTableBody = document.getElementById("inventory-table").getElementsByTagName("tbody")[0];
     inventoryTableBody.innerHTML = ""; // Limpia el contenido actual
 
@@ -43,7 +55,7 @@ const loadInventory = () => {
         row.appendChild(nameCell);
 
         const stockCell = document.createElement("td");
-        stockCell.textContent = item.stock;
+        stockCell.textContent = item.cantidad;
         row.appendChild(stockCell);
 
         inventoryTableBody.appendChild(row);

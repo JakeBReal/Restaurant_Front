@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     addClientForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
         const tableId = parseInt(tableSelect.value, 10);
         const clientName = clientNameInput.value.trim();
 
@@ -83,20 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
          
 
             clientNameInput.value = '';
-
-            const table = tables.find(t => t.id === tableId);
-            if (table) {
-                table.cliente = clientName;
-                table.status = 'unavailable';
-                renderTables();
-                addClientForm.reset();
-                
-                // Despachar evento de cliente agregado
-                const event = new CustomEvent('clientAdded', {
-                    detail: { clientName, tableId }
-                });
-                document.dispatchEvent(event);
-            }
         }
     renderTables();
 
