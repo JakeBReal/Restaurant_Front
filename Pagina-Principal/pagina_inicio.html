@@ -48,9 +48,11 @@
 
     <div id="mesasList">
         <h3>Mesas Añadidas</h3>
-        <ul id="mesas"></ul>
+        <div id="mesas" class="mesas-container"></div> 
     </div>
 </div>
+
+
 
 <script>
     // Manejar el clic en los enlaces de la navegación
@@ -79,7 +81,7 @@
             <!-- Mesas existentes -->
             <section id="rooms" class="section">
                 <h2>Mesas</h2>
-                <div id="tables-container"></div>
+                <div id="tables-container" class="tables-container"></div>
                 <form id="add-client-form">
                     <h3>Agregar Cliente a Mesa</h3>
                     <label for="table-select">Seleccionar Mesa:</label>
@@ -205,9 +207,19 @@
 
             <section id="summary" class="section">
                 <h2>Cuadre</h2>
+                <div>
+                    <label for="time-range">Seleccionar rango de tiempo:</label>
+                    <select id="time-range">
+                        <option value="day">Día pasado</option>
+                        <option value="week">Última semana</option>
+                        <option value="month">Último mes</option>
+                        <option value="year">Último año</option>
+                        <option value="all">Todos</option>
+                    </select>
+                    <button id="calculate-total">Calcular Total</button>
+                </div>
                 <div id="summary-container"></div>
             </section>
-
 
 
 
@@ -241,16 +253,16 @@
 
     <footer>
         <div class="contact-info">
-            <a href="https://wa.me/849-889-1863" target="_blank">
+            <a href="https://web.whatsapp.com/" target="_blank">
                 <img src="whatsapp-logo.png" alt="WhatsApp" class="icon"> +849-889-1863
             </a>
             <a href="https://instagram.com/tu_restaurant" target="_blank">
                 <img src="instagram-logo.png" alt="Instagram" class="icon"> @tu_restaurant
             </a>
-            <a href="https://goo.gl/maps/yourlocation" target="_blank">
+            <a href="https://maps.app.goo.gl/EAHBViCb3vHCKg9z6?g_st=com.google.maps.preview.copy" target="_blank">
                 <img src="map-logo.png" alt="Location" class="icon"> Nuestra ubicación
             </a>
-            <a href="mailto:contact@tu_restaurant.com" target="_blank">
+            <a href="https://accounts.google.com/b/0/AddMailService" target="_blank">
                 <img src="email-logo.png" alt="Email" class="icon"> contact@tu_restaurant.com
             </a>
         </div>

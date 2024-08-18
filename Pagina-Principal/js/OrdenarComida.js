@@ -66,6 +66,7 @@ const loadOccupiedTables = async () => {
                 
                     response = await response.json();
                     console.log('Table added :', response);
+                    
                   } catch (err) {
                     console.error('Error adding table:', err);
                   }
