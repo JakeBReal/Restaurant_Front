@@ -15,12 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const loadSummary = async (timeRange = 'all') => {
 
-        const response = await fetch('http://localhost:3000/getCuandre');
+        const queryParams = new URLSearchParams({
+            filter: timeRange
+        });
+
+        
+        const response = await fetch(`http://localhost:3000/getCuandre?${queryParams.toString()}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         let localData = await response.json();
-
         const container = document.getElementById('summary-container');
 
         if (!container) {
@@ -32,18 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
         container.innerHTML = '';
 
         // Filtrar los datos según el rango de tiempo seleccionado
-        const filteredData = filterDataByTimeRange(localData, timeRange);
 
         let total = 0;
 
-        filteredData.forEach(item => {
+        localData.forEach(item => {
             const accountDiv = document.createElement('div');
             accountDiv.classList.add('account');
             
             accountDiv.innerHTML = `
                 <h3>Cuenta #${item.id_cuenta}</h3>
                 <p><strong>Nombre del Cliente:</strong> ${item.nombre}</p>
-                <p><strong>Mesa:</strong> ${item.id_mesa}</p>
                 <p><strong>Fecha:</strong> ${item.fecha}</p>
                 <p><strong>Valor de la cuenta:</strong> ${item.total}</p>
             `;

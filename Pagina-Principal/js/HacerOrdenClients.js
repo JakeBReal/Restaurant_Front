@@ -4,6 +4,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   loadClients();
   loadMenuOptions1()
 
+
+  const accountsMenu = document.getElementById('clients');
+
+  accountsMenu.addEventListener('click', () => {
+    loadOccupiedTables();
+    loadMenuOptions();
+    loadClients();
+    loadMenuOptions1()
+  });
+
+
+
   const form = document.getElementById("add-food-form");
   form.addEventListener("submit", async (e) => {
    // e.preventDefault(); // Evita la recarga de la página

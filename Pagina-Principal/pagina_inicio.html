@@ -18,7 +18,7 @@
                 <li><a href="#menu">Menú</a></li>
                 <li><a href="#add-food">Agregar Alimentos</a></li> <!-- Nuevo -->
                 <li><a href="#manage-availability">Gestionar Disponibilidad</a></li> <!-- Nuevo -->
-                <li><a href="#clients">Clientes</a></li>
+                <li><a id="clients" href="#clients">Clientes</a></li>
                 <li><a id="prueba" href="#accounts">Cuentas</a></li>
                 <li><a id="cuadre1"  href="#summary">Cuadre</a></li>
 
@@ -210,11 +210,11 @@
                 <div>
                     <label for="time-range">Seleccionar rango de tiempo:</label>
                     <select id="time-range">
-                        <option value="day">Día pasado</option>
-                        <option value="week">Última semana</option>
-                        <option value="month">Último mes</option>
-                        <option value="year">Último año</option>
-                        <option value="all">Todos</option>
+                        <option value="yesterday">Día pasado</option>
+                        <option value="last_week">Última semana</option>
+                        <option value="last_month">Último mes</option>
+                        <option value="last_year">Último año</option>
+                        <option selected ="all">Todos</option>
                     </select>
                     <button id="calculate-total">Calcular Total</button>
                 </div>

@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    const renderTables = async()=> {
+    const renderTables=async () =>{
+
         const response = await fetch('http://localhost:3000/mesa');
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -14,24 +15,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const mesas = await response.json();
     
         const tables = mesas
+
         tablesContainer.innerHTML = '';
         tableSelect.innerHTML = '<option value="">Seleccione una mesa</option>';
         tables.forEach(table => {
-            const tableDiv = document.createElement('div');
-            tableDiv.className = 'table-image';
-
-            const img = document.createElement('img');
-            img.src = table.imageUrl;
-            img.alt = `Mesa ${table.id_mesa}`;
-
-            const statusSpan = document.createElement('span');
-            statusSpan.className = 'table-status';
-            statusSpan.textContent = table.estado ? 'Disponible' : 'No Disponible';
-            statusSpan.style.backgroundColor = table.estado  ? 'green' : 'red';
-            tableDiv.appendChild(img);
-            tableDiv.appendChild(statusSpan);
-            tablesContainer.appendChild(tableDiv);
-
+            const tableElement = document.createElement('div');
+            tableElement.className = 'table';
+            tableElement.innerHTML = `
+                <img src="${table.imagen}" alt="Mesa">
+                <p>Mesa ${table.id_mesa} - ${table.estado ? 'Disponible' : 'Ocupada'}</p>
+                ${table?.cliente ? `<p>Cliente: ${table.cliente}</p>` : ''}
+            `;
+            tablesContainer.appendChild(tableElement);
             if (table.estado) {
                 const option = document.createElement('option');
                 option.value = table.id_mesa;
@@ -40,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
 
     addClientForm.addEventListener('submit', async (e) => {
         const tableId = parseInt(tableSelect.value, 10);
