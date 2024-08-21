@@ -250,7 +250,7 @@ const loadClients = async () => {
       const listItem = document.createElement("li");
       listItem.textContent = `${orderItem.nombre} - $${orderItem.precio.toFixed(
         2
-      )}`;
+      )} cantidad: ${orderItem.cantidad}`;
       orderList.appendChild(listItem);
     });
 

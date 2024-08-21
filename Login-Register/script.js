@@ -87,7 +87,7 @@ const usuario =async ()=>{
 
       response = await response.json();
       console.log('Usuario creado:', response);
-      alert("Usuario creado correctamente");
+    alert("Usuario creado correctamente");
     } catch (err) {
       console.error('Error creando usuario:', err);
     }
