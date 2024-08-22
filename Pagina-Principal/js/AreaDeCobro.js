@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             accountDiv.innerHTML = `
                 <h3>Cliente: ${account.nombre} (Mesa ${account.tableId})</h3>
                 <ul>
-                    ${account.orders.map(order => `<li>${order.nombre} - ${getCurrencySymbol(account.currency)}${order.precio}</li>`).join('')}
+                    ${account.orders.map(order => `<li>${order.nombre} - ${getCurrencySymbol(account.currency)}${order.precio} Cantidad: ${order.cantidad} </li>`).join('')}
                 </ul>
                 <p>Total: ${getCurrencySymbol(account.currency)}${account.total}</p>
                 <button class="pay-button" data-mesa-id="${account.tableId}" data-account-id="${account.id_cuenta}" data-cliente-id="${account.id}" data-total-id="${account.total}">Pagar</button>
