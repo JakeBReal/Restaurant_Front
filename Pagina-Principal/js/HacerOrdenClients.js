@@ -4,6 +4,41 @@ document.addEventListener("DOMContentLoaded", async () => {
   loadClients();
   loadMenuOptions1()
 
+  const editButton = document.getElementById('edit-button');
+
+  editButton.addEventListener('click', async () => {
+    const userConfirmed = confirm('¿Estás seguro que deseas eliminar ese alimento?');
+    if (userConfirmed) {
+      const id_cliente = document.getElementById("occupied-tables").value
+      const id_menu = document.getElementById("food-selection").value
+
+      const responseMesa = await fetch(`http://localhost:3000/deleteComidaCliente?id_cliente=${id_cliente}&id_menu=${id_menu}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+
+    if (!responseMesa.ok) {
+        throw new Error('Network response was not ok');
+    }
+
+    const result = await responseMesa.json();
+    if(result.ok){
+      alert('El alimento se eliminó correctamente')
+    }else{
+      alert('El cliente no tiene agregado es alimento')
+    }
+    
+    loadOccupiedTables();
+    loadMenuOptions();
+    loadClients();
+    loadMenuOptions1()
+
+    } 
+
+  });
+
 
   const accountsMenu = document.getElementById('clients');
 
